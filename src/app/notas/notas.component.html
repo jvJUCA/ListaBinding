@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="calculator-card">
+      <h2>Calculadora de Média Facens</h2>
+      
+      <form [formGroup]="gradeForm" (ngSubmit)="calculateGrade()">
+        <div class="form-group">
+          <label for="ac1">AC1 (15%)</label>
+          <input 
+            type="number" 
+            id="ac1" 
+            formControlName="ac1"
+            min="0"
+            max="10"
+            step="0.1"
+          >
+          <div class="error" *ngIf="gradeForm.get('ac1')?.errors?.['required'] && gradeForm.get('ac1')?.touched">
+            AC1 é obrigatório
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="ac2">AC2 (30%)</label>
+          <input 
+            type="number" 
+            id="ac2" 
+            formControlName="ac2"
+            min="0"
+            max="10"
+            step="0.1"
+          >
+          <div class="error" *ngIf="gradeForm.get('ac2')?.errors?.['required'] && gradeForm.get('ac2')?.touched">
+            AC2 é obrigatório
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="ag">AG (10%)</label>
+          <input 
+            type="number" 
+            id="ag" 
+            formControlName="ag"
+            min="0"
+            max="10"
+            step="0.1"
+          >
+          <div class="error" *ngIf="gradeForm.get('ag')?.errors?.['required'] && gradeForm.get('ag')?.touched">
+            AG é obrigatório
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="af">AF (45%)</label>
+          <input 
+            type="number" 
+            id="af" 
+            formControlName="af"
+            min="0"
+            max="10"
+            step="0.1"
+          >
+          <div class="error" *ngIf="gradeForm.get('af')?.errors?.['required'] && gradeForm.get('af')?.touched">
+            AF é obrigatório
+          </div>
+        </div>
+  
+        <button type="submit" [disabled]="!gradeForm.valid">Calcular</button>
+      </form>
+  
+      <div class="result" *ngIf="showResult">
+        <h3>Resultado:</h3>
+        <p>Média Final: {{ finalGrade.toFixed(2) }}</p>
+        <p [class.approved]="isApproved" [class.failed]="!isApproved">
+          Status: {{ isApproved ? 'Aprovado' : 'Reprovado' }}
+        </p>
+      </div>
+      <div>
+        <a href="/calculadora"><button>Proximo Exercicio ➡</button></a>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="signup-card">
+        <h2>Cadastro de Aluno</h2>
+
+        <form [formGroup]="cadastrarForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="ra">RA</label>
+                <input type="number" id="ra" formControlName="ra">
+                <div class="error"
+                    *ngIf="cadastrarForm.get('ra')?.errors?.['required'] && cadastrarForm.get('ra')?.touched">
+                    RA é obrigatório
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" formControlName="nome">
+                <div class="error"
+                    *ngIf="cadastrarForm.get('nome')?.errors?.['required'] && cadastrarForm.get('nome')?.touched">
+                    Nome é obrigatório
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email">
+                <div class="error"
+                    *ngIf="cadastrarForm.get('email')?.errors?.['required'] && cadastrarForm.get('email')?.touched">
+                    Email é obrigatório
+                </div>
+                <div class="error"
+                    *ngIf="cadastrarForm.get('email')?.errors?.['email'] && cadastrarForm.get('email')?.touched">
+                    Email inválido
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="celular">Celular</label>
+                <input type="number" id="celular" formControlName="celular">
+                <div class="error"
+                    *ngIf="cadastrarForm.get('celular')?.errors?.['required'] && cadastrarForm.get('celular')?.touched">
+                    Celular é obrigatório
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="!cadastrarForm.valid">Cadastrar</button>
+        </form>
+
+        <div class="result" *ngIf="showResult">
+            <h3>Aluno cadastrado com sucesso!</h3>
+            <div class="student-info">
+                <p><strong>RA:</strong> {{studentInfo.ra}}</p>
+                <p><strong>Nome:</strong> {{studentInfo.nome}}</p>
+                <p><strong>Email:</strong> {{studentInfo.email}}</p>
+                <p><strong>Celular:</strong> {{studentInfo.celular}}</p>
+            </div>
+        </div>
+
+        <div>
+            <a href="/seguro"><button>Proximo Exercicio ➡</button></a>
+        </div>
+    </div>
+</div>

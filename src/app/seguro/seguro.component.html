@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="calculator-card">
+      <h2>Cálculo de Apólice de Seguro</h2>
+      
+      <form [formGroup]="apoliceForm" (ngSubmit)="calcularApolice()">
+        <div class="form-group">
+          <label for="nome">Nome do Segurado</label>
+          <input 
+            type="text" 
+            id="nome" 
+            formControlName="nome"
+          >
+          <div class="error" *ngIf="apoliceForm.get('nome')?.errors?.['required'] && apoliceForm.get('nome')?.touched">
+            Nome é obrigatório
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" formControlName="sexo">
+            <option value="">Selecione</option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+          </select>
+          <div class="error" *ngIf="apoliceForm.get('sexo')?.errors?.['required'] && apoliceForm.get('sexo')?.touched">
+            Sexo é obrigatório
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="idade">Idade</label>
+          <input 
+            type="number" 
+            id="idade" 
+            formControlName="idade"
+            min="18"
+            max="100"
+          >
+          <div class="error" *ngIf="apoliceForm.get('idade')?.errors?.['required'] && apoliceForm.get('idade')?.touched">
+            Idade é obrigatória
+          </div>
+          <div class="error" *ngIf="apoliceForm.get('idade')?.errors?.['min'] && apoliceForm.get('idade')?.touched">
+            Idade mínima é 18 anos
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="valorAutomovel">Valor do Automóvel</label>
+          <input 
+            type="number" 
+            id="valorAutomovel" 
+            formControlName="valorAutomovel"
+            min="0"
+            step="0.01"
+          >
+          <div class="error" *ngIf="apoliceForm.get('valorAutomovel')?.errors?.['required'] && apoliceForm.get('valorAutomovel')?.touched">
+            Valor do automóvel é obrigatório
+          </div>
+          <div class="error" *ngIf="apoliceForm.get('valorAutomovel')?.errors?.['min'] && apoliceForm.get('valorAutomovel')?.touched">
+            Valor deve ser maior que zero
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!apoliceForm.valid">Calcular Apólice</button>
+      </form>
+
+      <div class="result" *ngIf="showResult">
+        <h3>Resultado do Cálculo:</h3>
+        <div class="policy-info">
+          <p><strong>Nome do Segurado:</strong> {{apoliceInfo.nome}}</p>
+          <p><strong>Valor do Automóvel:</strong> {{apoliceInfo.valorAutomovel}}</p>
+          <p><strong>Valor da Apólice:</strong> {{apoliceInfo.valorApolice}}</p>
+          <p><strong>Percentual Aplicado:</strong> {{apoliceInfo.percentual}}%</p>
+        </div>
+      </div>
+      
+      <div>
+        <button (click)="jsConfetti.addConfetti()">Dar nota 10</button>
+      </div>
+    </div>
+  </div>
